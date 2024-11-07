@@ -66,30 +66,39 @@ public class Transaction {
 
     // Method to determine the type of transaction based on sender and receiver accounts
     private String determineTransactionType() {
-        String bankEmetteur = getBankByCompteId(this.compteIdEmetteur);
-        String bankRecepteur = getBankByCompteId(this.compteIdRecepteur);
-        String countryEmetteur = getCountryByCompteId(this.compteIdEmetteur);
-        String countryRecepteur = getCountryByCompteId(this.compteIdRecepteur);
+    String bankEmetteur = getBankByCompteId(this.compteIdEmetteur);
+    String bankRecepteur = getBankByCompteId(this.compteIdRecepteur);
+    String countryEmetteur = getCountryByCompteId(this.compteIdEmetteur);
+    String countryRecepteur = getCountryByCompteId(this.compteIdRecepteur);
 
-        // Ajoutez des messages pour vérifier les valeurs récupérées
-        System.out.println("Banque émetteur: " + bankEmetteur);
-        System.out.println("Banque récepteur: " + bankRecepteur);
-        System.out.println("Pays émetteur: " + countryEmetteur);
-        System.out.println("Pays récepteur: " + countryRecepteur);
+    // Ajoutez des messages pour vérifier les valeurs récupérées
+    System.out.println("Banque émetteur: " + bankEmetteur);
+    System.out.println("Banque récepteur: " + bankRecepteur);
+    System.out.println("Pays émetteur: " + countryEmetteur);
+    System.out.println("Pays récepteur: " + countryRecepteur);
 
-        // Check for VIRINI
-        if (bankEmetteur.equals(bankRecepteur)) {
-            return "VIRINI";
-        }
-        // Check for VIRMULTA
-        else if (countryEmetteur.equals(countryRecepteur) && !bankEmetteur.equals(bankRecepteur)) {
-            return "VIRMULTA";
-        }
-        // Otherwise, it's an invalid transaction type
-        else {
-            throw new IllegalArgumentException("Invalid transaction: Accounts are not compatible.");
-        }
+    // VIRINI : Même banque
+    if (bankEmetteur.equals(bankRecepteur)) {
+        return "VIRINI";
     }
+    // VIREST : Même pays, même banque
+    else if (countryEmetteur.equals(countryRecepteur) && bankEmetteur.equals(bankRecepteur)) {
+        return "VIREST";
+    }
+    // VIRMULTA : Même pays, mais différentes banques
+    else if (countryEmetteur.equals(countryRecepteur) && !bankEmetteur.equals(bankRecepteur)) {
+        return "VIRMULTA";
+    }
+    // VIRCHAC : Différentes banques, différents pays
+    else if (!countryEmetteur.equals(countryRecepteur) && !bankEmetteur.equals(bankRecepteur)) {
+        return "VIRCHAC";
+    }
+    // Sinon, transaction invalide
+    else {
+        throw new IllegalArgumentException("Invalid transaction: Accounts are not compatible.");
+    }
+}
+
 
 
     // Method to retrieve the bank associated with a given compteId
