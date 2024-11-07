@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.banque.ControllerTransaction" spacing="20" alignment="CENTER" minWidth="300" minHeight="300">
+    <HBox spacing="20" alignment="CENTER">
+        <TextField fx:id="transactionIdField" promptText="ID Transaction" minWidth="300"/>
+    </HBox>
+    <HBox spacing="20" alignment="CENTER">
+        <TextField fx:id="montantField" promptText="Montant" minWidth="300"/>
+    </HBox>
+    <HBox spacing="20" alignment="CENTER">
+        <TextField fx:id="compteEmetteurField" promptText="Compte Emetteur (ID)" minWidth="300"/>
+    </HBox>
+    <HBox spacing="20" alignment="CENTER">
+        <TextField fx:id="compteRecepteurField" promptText="Compte Recepteur (ID)" minWidth="300"/>
+    </HBox>
+    <HBox spacing="20" alignment="CENTER">
+        <Button text="Effectuer la Transaction" onAction="#effectuerTransaction" minWidth="200"/>
+    </HBox>
+</VBox>
+
