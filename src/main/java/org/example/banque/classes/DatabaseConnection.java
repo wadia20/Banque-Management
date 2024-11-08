@@ -10,7 +10,7 @@ public class DatabaseConnection {
 
     private static final String URL = "jdbc:mysql://localhost:3306/tp1";
     private static final String USER = "root";
-    private static final String PASSWORD ="Souiki@2003";
+    private static final String PASSWORD ="";
     private static final String DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
 
     public static Connection getConnection() {
